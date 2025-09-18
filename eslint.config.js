@@ -33,6 +33,16 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-    },
+      "react/prop-types": 0,
   },
-]
+
+  // Add an overrides array. Without this, ESLint could only be run via
+  // the npm run lint command. Adding this will allow it to be run also
+  // via the global `npx eslint .` command.
+  overrides: [
+    {
+      files: ["*.js", "*.jsx"],
+    },
+  ],
+  }
+];
