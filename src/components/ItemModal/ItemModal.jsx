@@ -10,9 +10,9 @@ function ItemModal({ activeModal, closeModalClick, card }) {
           type="button"
           className="modal__closeBtn2"
         >
-          <img src={closeBtn} alt="" />
+          <img src={closeBtn} alt="Item modal close button" />
         </button>
-        <img src={card.link} alt="" className="modal__image" />
+        <img src={card.link} alt={card.name} className="modal__image" />
         <h2 className="modal__name ui-text-1">{card.name}</h2>
         <p className="modal__weather ui-text-1">Weather: {card.weather}</p>
       </div>

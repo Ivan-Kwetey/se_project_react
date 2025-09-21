@@ -6,7 +6,11 @@ import Main from "../Main/MainContent.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ModalWithForm from "components/ModalWithForm/ModalWithForm";
 import ItemModal from "components/ItemModal/ItemModal";
-import { coordinates, APIkey } from "../../utils/constants.js";
+import {
+  coordinates,
+  apiKey,
+  defaultClothingItems,
+} from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 
 function App() {
@@ -15,6 +19,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -32,7 +37,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, apiKey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -44,7 +49,11 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header onGarmentClick={onGarmentClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Main
+          weatherData={weatherData}
+          clothingItems={clothingItems}
+          handleCardClick={handleCardClick}
+        />
         <Footer />
       </div>
       <ModalWithForm
@@ -55,7 +64,7 @@ function App() {
       >
         <div className="modal__contents ui-text-2">
           <label htmlFor="name" className="modal__label text_url">
-            Name{""}
+            Name
             <input
               type="text"
               id="name"
@@ -67,10 +76,10 @@ function App() {
             />
           </label>
           <label htmlFor="imageUrl" className="modal__label text_url">
-            Image{""}
+            Image
             <input
-              type="text"
-              id="imageURL "
+              type="url"
+              id="imageUrl"
               className="modal__input ui-text-2"
               placeholder="Image Url"
               required
@@ -79,27 +88,36 @@ function App() {
 
           <fieldset className="modal__legend_and_radio-buttons">
             <legend className="modal__legend">Select the weather type:</legend>
-            <div className=" modal__radio-buttons">
-              <label
-                htmlFor="hot"
-                className="modal__label modal__input_type_radio"
-              >
-                <input type="radio" className="modal__radio-input" id="hot" />
-                Hot{""}
+            <div className="modal__radio-buttons">
+              <label className="modal__label modal__input_type_radio">
+                <input
+                  type="radio"
+                  className="modal__radio-input"
+                  id="hot"
+                  name="weather"
+                  value="hot"
+                />
+                Hot
               </label>
-              <label
-                htmlFor="warm"
-                className="modal__label modal__input_type_radio"
-              >
-                <input type="radio" className="modal__radio-input" id="warm" />
-                Warm{""}
+              <label className="modal__label modal__input_type_radio">
+                <input
+                  type="radio"
+                  className="modal__radio-input"
+                  id="warm"
+                  name="weather"
+                  value="warm"
+                />
+                Warm
               </label>
-              <label
-                htmlFor="cold"
-                className="modal__label modal__input_type_radio"
-              >
-                <input type="radio" className="modal__radio-input" id="cold" />
-                Cold{""}
+              <label className="modal__label modal__input_type_radio">
+                <input
+                  type="radio"
+                  className="modal__radio-input"
+                  id="cold"
+                  name="weather"
+                  value="cold"
+                />
+                Cold
               </label>
             </div>
           </fieldset>
