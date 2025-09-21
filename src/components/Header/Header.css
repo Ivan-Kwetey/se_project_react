@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 10px 28px;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 40px;
+  margin-bottom: 28px;
+}
+
+.header__left-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__button-and-name {
+  display: flex;
+  gap: 20px;
+  height: 25px;
+  align-items: center;
+}
+
+.header__add-clothes-button{
+  border: none;
+}

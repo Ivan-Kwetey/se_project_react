@@ -1,0 +1,31 @@
+.item-card {
+  display: flex;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  gap: 20px;
+  width: fit-content;
+}
+
+.item-card__image {
+  display: flex;
+  width: 323px;
+  height: 326px;
+  border: 1px solid black;
+  border-radius: 19px;
+}
+
+.item-card__name {
+  position: absolute;
+  padding: 2px 12px;
+  border-radius: 4px;
+  text-align: center;
+  color: #00000099;
+  background-color: white;
+}
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+}

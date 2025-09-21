@@ -1,0 +1,32 @@
+.modal__content_type_image {
+  width: 498px;
+  max-height: 610px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.modal__image {
+  height: 498px;
+  width: 100%;
+}
+
+.modal__closeBtn2 {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal__name {
+  padding: 0 0 0 32px;
+}
+
+.modal__weather {
+  padding: 0 0 32px 32px;
+  margin: 0;
+}
