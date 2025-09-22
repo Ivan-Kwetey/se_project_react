@@ -3,9 +3,9 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__content ui-text">
+      <p className="footer__content modal__text">
         Developed by Kwetey <span> 2025</span>
-      </div>
+      </p>
     </footer>
   );
 }

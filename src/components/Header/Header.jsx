@@ -13,9 +13,9 @@ function Header({ onGarmentClick, weatherData }) {
         <img
           className="header_logo"
           src={logo}
-          alt="Logo showing the main branding of the website, placed at the top of the page in a clean and welcoming layout"
+          alt="Logo showing the main branding of the website"
         />
-        <p className="date-location ui-text-1">
+        <p className="date-location modal__text-1">
           {currentDate}, {weatherData.city}
         </p>
       </div>
@@ -24,11 +24,11 @@ function Header({ onGarmentClick, weatherData }) {
           <button
             onClick={onGarmentClick}
             type="button"
-            className="header__add-clothes-button ui-text-1"
+            className="header__add-clothes-button modal__text-1"
           >
             + Add clothes
           </button>
-          <p className="header__username ui-text-1">Terrance Tegegne</p>
+          <p className="header__username modal__text-1">Terrance Tegegne</p>
         </div>
         <img src={avatar} alt="profile photo" className="header__avatar" />
       </div>

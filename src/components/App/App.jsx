@@ -42,7 +42,9 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Failed to fetch weather data:", error);
+      });
   }, []);
 
   return (
@@ -59,16 +61,16 @@ function App() {
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         closeModalClick={closeActiveModal}
       >
-        <div className="modal__contents ui-text-2">
+        <div className="modal__contents modal__text-2">
           <label htmlFor="name" className="modal__label text_url">
             Name
             <input
               type="text"
               id="name"
-              className="modal__input ui-text-2"
+              className="modal__input modal__text-2"
               placeholder="Name"
               required
               minLength="1"
@@ -80,7 +82,7 @@ function App() {
             <input
               type="url"
               id="imageUrl"
-              className="modal__input ui-text-2"
+              className="modal__input modal__text-2"
               placeholder="Image Url"
               required
             />

@@ -7,7 +7,7 @@ function ItemCard({ item, onCardClick }) {
   return (
     <div className="item-container">
       <div className="item-card">
-        <h2 className="item-card__name ui-text-2">{item.name}</h2>
+        <h2 className="item-card__name modal__text-2">{item.name}</h2>
         <img onClick={handleCardClick} className="item-card__image" src={item.link} alt={item.name} />
       </div>
     </div>

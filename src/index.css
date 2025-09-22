@@ -3,22 +3,21 @@
 
 * {
   font-family: "Cabinet Grotesk", sans-serif;
-  box-sizing: border-box;
 }
 
-.ui-text-1 {
+.modal__text-1 {
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
 }
 
-.ui-text-2 {
+.modal__text-2 {
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;
 }
 
-.ui-text {
+.modal__text {
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;

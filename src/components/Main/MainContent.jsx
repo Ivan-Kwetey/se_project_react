@@ -7,7 +7,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
     <main className="main">
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
-        <p className="weather__text ui-text-1">
+        <p className="weather__text modal__text-1">
           Today is {Math.round(weatherData.temp.F)}° F / You may want to wear:
         </p>
         <ul className="class__list">
