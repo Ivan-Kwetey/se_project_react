@@ -23,10 +23,45 @@
 }
 
 .modal__name {
-  padding: 0 0 0 32px;
+  margin: 0;
+  padding: 0;
+
 }
 
 .modal__weather {
-  padding: 0 0 32px 32px;
   margin: 0;
+  padding: 0;
 }
+
+.details{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 32px;
+  align-items: flex-start;
+
+
+}
+.modal__delete-button {
+  color: #FF4D00;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__delete-button:hover {
+  background-color: #b71c1c;
+}
+
+
+

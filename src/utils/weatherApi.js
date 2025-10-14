@@ -11,21 +11,22 @@ export const getWeather = ({ latitude, longitude }, apiKey) => {
 
 export const filterWeatherData = (data) => {
   const tempF = data.main.temp;
+  const tempC = ((tempF - 32) * 5) / 9;
 
-  // map temperature to weather type
   const type = getWeatherType(tempF);
 
   return {
     city: data.name,
-    type, // already lowercase
+    type,
     temp: {
-      F: tempF,
-      C: ((tempF - 32) * 5) / 9,
+      F: Math.round(tempF),
+      C: Math.round(tempC),
     },
     condition: data.weather[0].main.toLowerCase(),
     isDay: isDay(data.sys.sunrise, data.sys.sunset, Date.now()),
   };
 };
+
 
 // check if current time is daytime
 const isDay = (sunrise, sunset, now) => {

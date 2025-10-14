@@ -1,0 +1,12 @@
+
+.user-info{
+    display: flex;
+    align-items: center;
+    width: 229px;
+    justify-content: space-between;
+}
+
+.header__username{
+    margin: 0;
+    padding: 0;
+}

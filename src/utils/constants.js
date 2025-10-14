@@ -1,5 +1,5 @@
 // The utils files contain default clothing items
-export const defaultClothingItems = [
+const defaultClothingItems = [
   {
     _id: 1,
     name: "Boot",
