@@ -1,4 +1,3 @@
-// AddItemModal.jsx
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
@@ -14,10 +13,8 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Pass resetForm as callback
     onAddItem(values, resetForm);
 
-    // ✅ Close modal (form will reset only after successful add)
     onCloseModal();
   };
 

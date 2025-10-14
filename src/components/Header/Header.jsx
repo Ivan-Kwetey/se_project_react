@@ -12,7 +12,6 @@ function Header({ onGarmentClick, weatherData }) {
   return (
     <header className="header">
       <div className="header__left-container">
-        {/* 🧭 Logo links to homepage */}
         <Link to="/">
           <img
             className="header_logo"
@@ -36,13 +35,11 @@ function Header({ onGarmentClick, weatherData }) {
             + Add clothes
           </button>
 
-          {/* 🧭 Username links to profile */}
           <Link to="/profile" className="header__username modal__text-1">
             Terrance Tegegne
           </Link>
         </div>
 
-        {/* 🧭 Avatar links to profile */}
         <Link to="/profile">
           <img src={avatar} alt="profile" className="header__avatar" />
         </Link>

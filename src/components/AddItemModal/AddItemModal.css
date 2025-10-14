@@ -1,6 +1,5 @@
 input[type="radio"] {
   accent-color: black;
-    /* margin-right: 8px; */
 }
 
 .legend__text{
@@ -11,7 +10,7 @@ input[type="radio"] {
   margin-right: 8px;
 
 }
-/* 2. Base style for label text */
+
 .modal__radio-label {
   display: flex;
   align-items: center;
@@ -20,10 +19,9 @@ input[type="radio"] {
   font-weight: 400;
 }
 
-/* 3. Make the text black when selected */
 input[type="radio"]:checked + span {
   color: black;
-  font-weight: 500; /* Optional: make selected bolder */
+  font-weight: 500; 
 }
 
 .modal {
