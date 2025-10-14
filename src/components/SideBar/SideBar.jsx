@@ -10,7 +10,7 @@ function SideBar() {
           <img src={avatar} alt="profile photo" className="header__avatar" />
         </div>
         <div>
-          <p className="header__username modal__text-1">Terrance Tegegne</p>
+          <p className="sidebar__username modal__text-1">Terrance Tegegne</p>
         </div>
       </div>
     </div>

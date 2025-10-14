@@ -10,7 +10,7 @@
   flex-direction: column;
 }
 
-.class__list {
+.cards__list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -18,6 +18,6 @@
   padding: 0;
 }
 
-.class__list-item {
+.cards__list-item {
   list-style-type: none;
 }

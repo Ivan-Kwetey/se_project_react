@@ -10,12 +10,14 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
     weather: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    onAddItem(values, resetForm);
-
-    onCloseModal();
+    try {
+      await onAddItem(values, resetForm);
+      onCloseModal();
+    } catch (err) {
+      console.error("Failed to add item:", err);
+    }
   };
 
   return (
@@ -40,6 +42,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
             required
           />
         </label>
+
         <label htmlFor="imageUrl" className="modal__label">
           Image
           <input
@@ -55,7 +58,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
         </label>
 
         <fieldset className="modal__legend_and_radio-buttons">
-          <legend className="legend__text">Select the weather type:</legend>
+          <legend className="modal__legend-text">Select the weather type:</legend>
           <div className="modal__radio-buttons">
             {["hot", "warm", "cold"].map((type) => (
               <label key={type}>

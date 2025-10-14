@@ -5,11 +5,8 @@ function ItemModal({ activeModal, closeModalClick, card, onCardDelete }) {
   const isOpen = activeModal === "preview";
 
   const handleDelete = () => {
-    onCardDelete(card); // ✅ Trigger deletion
+    onCardDelete(card);
   };
-
-  console.log("Rendering ItemModal, card:", card);
-  console.log("onCardDelete exists?", typeof onCardDelete === "function");
 
   return (
     <div className={`modal ${isOpen ? "modal__open" : ""}`}>
@@ -41,4 +38,5 @@ function ItemModal({ activeModal, closeModalClick, card, onCardDelete }) {
     </div>
   );
 }
+
 export default ItemModal;
