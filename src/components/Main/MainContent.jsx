@@ -12,13 +12,14 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="weather__text modal__text-1">
-          Today is {Math.round(weatherData.temp[currentTemperatureUnit])}° {currentTemperatureUnit} / You may want to wear:
+          Today is {Math.round(weatherData.temp[currentTemperatureUnit])}°{" "}
+          {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
           {clothingItems
             .filter((item) => item.weather.toLowerCase() === weatherData.type)
             .map((item) => (
-              <li key={item._id} className="cards__list-item">
+              <li key={item.id} className="cards__list-item">
                 <ItemCard item={item} onCardClick={handleCardClick} />
               </li>
             ))}

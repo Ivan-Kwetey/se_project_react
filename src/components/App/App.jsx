@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -11,65 +11,46 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 
 import { coordinates, apiKey } from "../../utils/constants.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
-
 import { getItems, addItem, deleteItem } from "../../utils/api.js";
 
 function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
-  };
-
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
     city: "",
   });
-
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
-  const onGarmentClick = () => {
-    setActiveModal("add-garment");
+  // Toggle temperature units
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
-
+  // Modal management
+  const openAddGarmentModal = () => setActiveModal("add-garment");
+  const closeAllPopups = useCallback(() => setActiveModal(""), []);
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("preview");
   };
 
-  const handleCardDelete = async (cardToDelete) => {
-    try {
-      await deleteItem(cardToDelete._id);
-      setClothingItems((prevItems) =>
-        prevItems.filter((item) => item._id !== cardToDelete._id)
-      );
-      closeActiveModal(); // Close modal after deletion
-    } catch (error) {
-      console.error("Failed to delete item:", error);
-    }
-  };
+  // Add Escape key listener to close modals
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
 
-  const handleAddItem = async (item, resetFormCallback) => {
-    try {
-      // item is expected to have { name, imageUrl, weather }
-      const newItem = await addItem(item);
-      setClothingItems((prevItems) => [newItem, ...prevItems]);
-      resetFormCallback();
-      closeActiveModal();
-    } catch (error) {
-      console.error("Failed to add item:", error);
-    }
-  };
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, [closeAllPopups]); // include callback dependency for stability
 
+  // Fetch weather data once
   useEffect(() => {
     getWeather(coordinates, apiKey)
       .then((data) => {
@@ -81,13 +62,39 @@ function App() {
       });
   }, []);
 
+  // Fetch clothing items once
   useEffect(() => {
     getItems()
-      .then((items) => setClothingItems(items))
+      .then(setClothingItems)
       .catch((error) =>
         console.error("Failed to fetch clothing items:", error)
       );
   }, []);
+
+  // Handle adding new item
+  const handleAddItem = async (item, resetFormCallback) => {
+    try {
+      const newItem = await addItem(item);
+      setClothingItems((prevItems) => [newItem, ...prevItems]);
+      resetFormCallback();
+      closeAllPopups();
+    } catch (error) {
+      console.error("Failed to add item:", error);
+    }
+  };
+
+  // Handle deleting an item
+  const handleCardDelete = async (cardToDelete) => {
+    try {
+      await deleteItem(cardToDelete.id);
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item.id !== cardToDelete.id)
+      );
+      closeAllPopups();
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+    }
+  };
 
   return (
     <div className="page">
@@ -101,7 +108,7 @@ function App() {
               element={
                 <>
                   <Header
-                    onGarmentClick={onGarmentClick}
+                    onGarmentClick={openAddGarmentModal}
                     weatherData={weatherData}
                   />
                   <Main
@@ -118,12 +125,12 @@ function App() {
               element={
                 <>
                   <Header
-                    onGarmentClick={onGarmentClick}
+                    onGarmentClick={openAddGarmentModal}
                     weatherData={weatherData}
                   />
                   <Profile
                     clothingItems={clothingItems}
-                    onAddItemClick={onGarmentClick}
+                    onAddItemClick={openAddGarmentModal}
                     handleCardClick={handleCardClick}
                   />
                 </>
@@ -134,13 +141,13 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onAddItem={handleAddItem}
-            onCloseModal={closeActiveModal}
+            onCloseModal={closeAllPopups}
           />
 
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            closeModalClick={closeActiveModal}
+            closeModalClick={closeAllPopups}
             onCardDelete={handleCardDelete}
           />
         </CurrentTemperatureUnitContext.Provider>

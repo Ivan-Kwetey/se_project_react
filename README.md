@@ -4,6 +4,8 @@
 
 ## Overview
 
+🎥 **[Watch the Project Pitch Video](https://www.loom.com/share/2cf3940b78cd47bfaa323416b88ac4d1)**
+
 WTWR (_What to Wear_) is a responsive web application that recommends suitable clothing items based on real-time weather data.  
 This sprint focused on **building the frontend** of the application using React, with functionality to:
 
@@ -52,6 +54,4 @@ The backend integration will follow in a later sprint.
 
 ## Next Steps
 
-- Implement full-stack functionality: connect to backend for persistent storage of clothing items and user profiles
-- Enable users to add, edit, and delete clothing items
-- Support user authentication and personalized recommendations
+- A complete deployed fullstack app

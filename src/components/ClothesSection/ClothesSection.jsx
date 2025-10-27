@@ -7,11 +7,16 @@ function ClothesSection({ clothingItems, onAddItemClick, onCardClick }) {
     <div className="clothes-section">
       <div className="clothes-section__header">
         <h2 className="modal__text-1">Your Items</h2>
-        <button className="clothes-section__header-button" onClick={onAddItemClick}>+ Add new</button>
+        <button
+          className="clothes-section__header-button"
+          onClick={onAddItemClick}
+        >
+          + Add new
+        </button>
       </div>
       <ul className="clothes-section__list">
         {clothingItems.map((item) => (
-          <li key={item._id}>
+          <li key={item.id}>
             <ItemCard item={item} onCardClick={onCardClick} />
           </li>
         ))}

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import "./AddItemModal.css";
 
 function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
-  const { values, handleChange, resetForm } = useForm({
+  const { values, handleChange, resetForm, isValid } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
@@ -14,11 +14,17 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
     e.preventDefault();
     try {
       await onAddItem(values, resetForm);
-      onCloseModal();
     } catch (err) {
       console.error("Failed to add item:", err);
     }
   };
+
+  // Reset form whenever modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
 
   return (
     <ModalWithForm
@@ -27,6 +33,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
       isOpen={isOpen}
       closeModalClick={onCloseModal}
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
       <div className="modal__contents modal__text-2">
         <label htmlFor="name" className="modal__label">
@@ -58,20 +65,22 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
         </label>
 
         <fieldset className="modal__legend_and_radio-buttons">
-          <legend className="modal__legend-text">Select the weather type:</legend>
+          <legend className="modal__legend-text">
+            Select the weather type:
+          </legend>
           <div className="modal__radio-buttons">
-            {["hot", "warm", "cold"].map((type) => (
-              <label key={type}>
+            {["hot", "warm", "cold"].map((type, index) => (
+              <label key={type} className="modal__radio-label">
                 <input
                   type="radio"
                   name="weather"
                   value={type}
                   checked={values.weather === type}
                   onChange={handleChange}
-                  required
+                  required={index === 0} // only one radio needs required
                   className="modal__radio-input"
                 />
-                {type[0].toUpperCase() + type.slice(1)}
+                <span>{type[0].toUpperCase() + type.slice(1)}</span>
               </label>
             ))}
           </div>

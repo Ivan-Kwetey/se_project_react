@@ -1,10 +1,15 @@
 const BASE_URL = "http://localhost:3001/items";
 
+// Reusable response checker
+function checkResponse(res, message = "Error") {
+  if (!res.ok) throw new Error(message);
+  return res.json();
+}
+
 // GET all clothing items
 export async function getItems() {
   const res = await fetch(BASE_URL);
-  if (!res.ok) throw new Error("Failed to fetch items");
-  return res.json();
+  return checkResponse(res, "Failed to fetch items");
 }
 
 // POST add a new clothing item
@@ -16,8 +21,7 @@ export async function addItem(item) {
     },
     body: JSON.stringify(item),
   });
-  if (!res.ok) throw new Error("Failed to add item");
-  return res.json();
+  return checkResponse(res, "Failed to add item");
 }
 
 // DELETE a clothing item by id
@@ -25,6 +29,5 @@ export async function deleteItem(id) {
   const res = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
-  if (!res.ok) throw new Error("Failed to delete item");
-  return res.json();
+  return checkResponse(res, "Failed to delete item");
 }
