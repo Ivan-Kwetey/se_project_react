@@ -1,18 +1,45 @@
-import React from "react";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { logo } from "assets"; // keep logo import if used elsewhere
 import "./SideBar.css";
-import { logo, avatar } from "assets";
 
-function SideBar() {
+function SideBar({ onSignOut, onEditProfile }) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <div className="sidebar">
       <div className="user-info">
-        <div className="avartar">
-          <img src={avatar} alt="profile photo" className="header__avatar" />
+        <div className="avatar">
+          <img
+            src={currentUser?.avatar || "/default-avatar.png"}
+            alt="profile photo"
+            className="header__avatar"
+          />
         </div>
         <div>
-          <p className="sidebar__username modal__text-1">Terrance Tegegne</p>
+          <p className="sidebar__username modal__text-1">
+            {currentUser?.name || "Guest"}
+          </p>
         </div>
       </div>
+
+      {currentUser && (
+        <>
+          <button
+            className="sidebar__edit-button modal__text-1"
+            onClick={onEditProfile}
+          >
+            Edit Profile
+          </button>
+
+          <button
+            className="sidebar__signout-button modal__text-1"
+            onClick={onSignOut}
+          >
+            Sign Out
+          </button>
+        </>
+      )}
     </div>
   );
 }

@@ -1,13 +1,22 @@
 import "./Header.css";
-import { logo, avatar } from "assets";
+import { logo } from "assets";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Header({ onGarmentClick, weatherData }) {
+function Header({ onGarmentClick, weatherData, onLoginClick, onRegisterClick, onEditProfile, onSignOut }) {
+  const currentUser = useContext(CurrentUserContext);
+  const loggedIn = !!currentUser;
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  // Fallback for avatar: show first letter if no avatar
+  const userAvatar = currentUser?.avatar;
+  const userInitial = currentUser?.name?.charAt(0).toUpperCase();
 
   return (
     <header className="header">
@@ -27,22 +36,70 @@ function Header({ onGarmentClick, weatherData }) {
       <div className="header__user-container">
         <ToggleSwitch />
         <div className="header__button-and-name">
-          <button
-            onClick={onGarmentClick}
-            type="button"
-            className="header__add-clothes-button modal__text-1"
-          >
-            + Add clothes
-          </button>
+          {loggedIn ? (
+            <>
+              <button
+                onClick={onGarmentClick}
+                type="button"
+                className="header__add-clothes-button modal__text-1"
+              >
+                + Add clothes
+              </button>
 
-          <Link to="/profile" className="header__username modal__text-1">
-            Terrance Tegegne
-          </Link>
+              {/* <button
+                onClick={onEditProfile}
+                type="button"
+                className="header__edit-profile-button modal__text-1"
+              >
+                Edit profile
+              </button> */}
+
+              {/* <button
+                onClick={onSignOut}
+                type="button"
+                className="header__signout-button modal__text-1"
+              >
+                Sign out
+              </button> */}
+
+              <Link to="/profile" className="header__username modal__text-1">
+                {currentUser.name}
+              </Link>
+
+              <Link to="/profile" className="header__avatar-link">
+                {userAvatar ? (
+                  <img
+                    src={userAvatar}
+                    alt="profile"
+                    className="header__avatar"
+                  />
+                ) : (
+                  <div className="header__avatar-placeholder">
+                    {userInitial}
+                  </div>
+                )}
+              </Link>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={onRegisterClick}
+                type="button"
+                className="header__auth-button modal__text-1"
+              >
+                Sign up
+              </button>
+
+              <button
+                onClick={onLoginClick}
+                type="button"
+                className="header__auth-button modal__text-1"
+              >
+                Sign in
+              </button>
+            </>
+          )}
         </div>
-
-        <Link to="/profile">
-          <img src={avatar} alt="profile" className="header__avatar" />
-        </Link>
       </div>
     </header>
   );

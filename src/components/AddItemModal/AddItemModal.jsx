@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import "./AddItemModal.css";
 
 function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
-  const { values, handleChange, resetForm, isValid } = useForm({
-    name: "",
-    imageUrl: "",
-    weather: "",
-  });
+  const initialValues = useMemo(
+    () => ({ name: "", imageUrl: "", weather: "" }),
+    []
+  );
+
+  const { values, handleChange, resetForm, isValid } = useForm(initialValues);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -36,3 +36,8 @@
 .header__add-clothes-button{
   border: none;
 }
+
+.header__auth-button{
+  border: none;
+  background-color: transparent;
+}

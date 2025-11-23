@@ -3,12 +3,12 @@ import { closeBtn } from "assets";
 
 function ModalWithForm({
   children,
-  buttonText,
   title,
   isOpen,
   closeModalClick,
   onSubmit,
   isValid,
+  submitText, // new prop for button label
 }) {
   return (
     <div className={`modal ${isOpen ? "modal__open" : ""}`}>
@@ -26,12 +26,13 @@ function ModalWithForm({
 
         {children}
 
+        {/* Always render submit button */}
         <button
           type="submit"
           className="modal__submitBtn modal__text-2"
           disabled={!isValid}
         >
-          {buttonText}
+          {submitText || "Submit"}
         </button>
       </form>
     </div>

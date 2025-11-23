@@ -6,28 +6,74 @@ function checkResponse(res, message = "Error") {
   return res.json();
 }
 
-// GET all clothing items
+// Helper to normalize backend item to frontend shape
+function normalizeItem(item) {
+  return {
+    id: item._id,
+    name: item.name,
+    weather: item.weather,
+    imageUrl: item.imageUrl,
+    likes: item.likes || [],
+    owner: item.owner,
+    createdAt: item.createdAt,
+  };
+}
+
+// GET all clothing items (returns an array of normalized items)
 export async function getItems() {
   const res = await fetch(BASE_URL);
-  return checkResponse(res, "Failed to fetch items");
+  const json = await checkResponse(res, "Failed to fetch items");
+  return (json.data || []).map(normalizeItem);
+}
+// PUT /items/:id/likes
+export async function addCardLike(id, token) {
+  const res = await fetch(`${BASE_URL}/${id}/likes`, {
+    method: "PUT",
+    headers: { authorization: `Bearer ${token}` },
+  });
+  return checkResponse(res, "Failed to like item");
 }
 
-// POST add a new clothing item
+// DELETE /items/:id/likes
+export async function removeCardLike(id, token) {
+  const res = await fetch(`${BASE_URL}/${id}/likes`, {
+    method: "DELETE",
+    headers: { authorization: `Bearer ${token}` },
+  });
+  return checkResponse(res, "Failed to remove like");
+}
+
+
+// POST add a new clothing item (returns the created normalized item)
 export async function addItem(item) {
+  // item, optional token
+  const { token } = item || {};
+  const payload = { ...item };
+  delete payload.token;
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers.authorization = `Bearer ${token}`;
   const res = await fetch(BASE_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(item),
+    headers,
+    body: JSON.stringify(payload),
   });
-  return checkResponse(res, "Failed to add item");
+  const json = await checkResponse(res, "Failed to add item");
+  return normalizeItem(json.data);
 }
 
-// DELETE a clothing item by id
+// DELETE a clothing item by id (returns backend response object)
 export async function deleteItem(id) {
+  // second optional arg token
+  let token;
+  if (typeof id === "object") {
+    token = id.token;
+    id = id.id;
+  }
+  const headers = {};
+  if (token) headers.authorization = `Bearer ${token}`;
   const res = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
+    headers,
   });
   return checkResponse(res, "Failed to delete item");
 }
