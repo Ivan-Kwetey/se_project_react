@@ -14,7 +14,7 @@ function ClothesSection({ clothingItems, onAddItemClick, onCardClick, onCardLike
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
-        <h2 className="modal__text-1">Your Items</h2>
+        <h2 className="clothes-section__title modal__text-1">Your Items</h2>
         <button
           className="clothes-section__header-button subtext"
           onClick={onAddItemClick}
@@ -25,7 +25,7 @@ function ClothesSection({ clothingItems, onAddItemClick, onCardClick, onCardLike
 
       <ul className="clothes-section__list">
         {userItems.map((item) => (
-          <li key={item._id}>
+          <li key={item.id}>
             <ItemCard item={item} onCardClick={onCardClick} onCardLike={onCardLike} />
           </li>
         ))}

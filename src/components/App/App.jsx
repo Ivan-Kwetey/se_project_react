@@ -105,10 +105,13 @@ function App() {
 
   const handleCardDelete = async (cardToDelete) => {
     try {
-      const arg = token ? { id: cardToDelete.id, token } : cardToDelete.id;
-      await deleteItem(arg);
+      const id = cardToDelete._id || cardToDelete.id;
+      await deleteItem(token ? { id, token } : id);
+
       setClothingItems((prev) =>
-        prev.filter((item) => item.id !== cardToDelete.id)
+        prev.filter(
+          (item) => (item._id || item.id) !== id
+        )
       );
       closeAllPopups();
     } catch (err) {
@@ -147,32 +150,29 @@ function App() {
     }
   };
 
-const handleCardLike = async (card) => {
-  if (!currentUser) return;
-  const token = localStorage.getItem("jwt");
+  const handleCardLike = async (card) => {
+    if (!currentUser) return;
+    const token = localStorage.getItem("jwt");
 
-  // Determine if the current user has liked the card
-  const isLiked = card.likes.some((id) => id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
 
-  try {
-    // Send request depending on current like status
-    const updatedCard = isLiked
-      ? await removeCardLike(card._id || card.id, token)
-      : await addCardLike(card._id || card.id, token);
+    try {
+      const updatedCard = isLiked
+        ? await removeCardLike(card._id || card.id, token)
+        : await addCardLike(card._id || card.id, token);
 
-    // Update the state immediately with the returned card
-    setClothingItems((prevItems) =>
-      prevItems.map((item) =>
-        (item._id || item.id) === (updatedCard.data?._id || updatedCard._id || updatedCard.id)
-          ? updatedCard.data || updatedCard
-          : item
-      )
-    );
-  } catch (err) {
-    console.error("Failed to update like:", err);
-  }
-};
-
+      setClothingItems((prevItems) =>
+        prevItems.map((item) =>
+          (item._id || item.id) ===
+          (updatedCard.data?._id || updatedCard._id || updatedCard.id)
+            ? updatedCard.data || updatedCard
+            : item
+        )
+      );
+    } catch (err) {
+      console.error("Failed to update like:", err);
+    }
+  };
 
   // --- Render ---
   return (
@@ -197,7 +197,7 @@ const handleCardLike = async (card) => {
                       weatherData={weatherData}
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
-                      onCardLike={handleCardLike} 
+                      onCardLike={handleCardLike}
                     />
                     <Footer />
                   </>
@@ -248,11 +248,19 @@ const handleCardLike = async (card) => {
               isOpen={activeModal === "register"}
               onRegister={handleRegister}
               onCloseModal={closeAllPopups}
+              onSwitchToLogin={() => {
+                closeAllPopups();
+                openLoginModal();
+              }}
             />
             <LoginModal
               isOpen={activeModal === "login"}
               onLogin={handleLogin}
               onCloseModal={closeAllPopups}
+              onSwitchToRegister={() => {
+                closeAllPopups();
+                openRegisterModal();
+              }}
             />
             <ItemModal
               activeModal={activeModal}

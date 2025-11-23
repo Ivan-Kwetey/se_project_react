@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { logo } from "assets"; // keep logo import if used elsewhere
 import "./SideBar.css";
 
 function SideBar({ onSignOut, onEditProfile }) {

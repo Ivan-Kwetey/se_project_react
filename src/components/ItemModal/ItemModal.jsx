@@ -12,7 +12,7 @@ function ItemModal({ activeModal, closeModalClick, card, onCardDelete }) {
   };
 
   // Show delete button only if the current user owns the item
-  const isOwn = currentUser && card.owner === currentUser._id;
+  const isOwn = currentUser && (card.owner?._id || card.owner) === currentUser._id;
 
   return (
     <div className={`modal ${isOpen ? "modal__open" : ""}`}>
