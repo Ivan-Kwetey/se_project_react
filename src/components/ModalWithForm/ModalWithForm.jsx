@@ -32,7 +32,7 @@ function ModalWithForm({
           className="modal__submitBtn modal__text-2"
           disabled={!isValid}
         >
-          {submitText || "Submit"}
+          {submitText || "Save changes"}
         </button>
       </form>
     </div>

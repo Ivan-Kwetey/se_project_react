@@ -197,7 +197,7 @@ const handleCardLike = async (card) => {
                       weatherData={weatherData}
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
-                      onCardLike={handleCardLike} // <-- pass like handler
+                      onCardLike={handleCardLike} 
                     />
                     <Footer />
                   </>
@@ -230,6 +230,7 @@ const handleCardLike = async (card) => {
                           setLoggedIn(false);
                           setCurrentUser(null);
                         }}
+                        onCardLike={handleCardLike}
                       />
                     </>
                   </ProtectedRoute>

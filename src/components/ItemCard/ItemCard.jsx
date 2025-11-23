@@ -20,7 +20,18 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     <div className="item-container">
       <div className="item-card">
         <h2 className="item-card__name modal__text-2">
-          <span className="item-card__name-text">{item.name}</span>
+          <span className="item-card__name-text-like">
+            <div className="item-card__name-text">{item.name}</div>
+             {currentUser && (
+          <img
+            onClick={handleLike}
+            className="item-card__like-button"
+            src={isLiked ? likedIcon : likeIcon}
+            alt={isLiked ? "Liked" : "Like"}
+          />
+        )}
+            
+          </span>
         </h2>
 
         <img
@@ -30,14 +41,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
           alt={item.name}
         />
 
-        {currentUser && (
-          <img
-            onClick={handleLike}
-            className="item-card__like-button"
-            src={isLiked ? likedIcon : likeIcon}
-            alt={isLiked ? "Liked" : "Like"}
-          />
-        )}
+  
       </div>
     </div>
   );

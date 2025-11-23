@@ -3,7 +3,7 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import "./ClothesSection.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ clothingItems, onAddItemClick, onCardClick }) {
+function ClothesSection({ clothingItems, onAddItemClick, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Filter items for logged-in user
@@ -16,7 +16,7 @@ function ClothesSection({ clothingItems, onAddItemClick, onCardClick }) {
       <div className="clothes-section__header">
         <h2 className="modal__text-1">Your Items</h2>
         <button
-          className="clothes-section__header-button"
+          className="clothes-section__header-button subtext"
           onClick={onAddItemClick}
         >
           + Add new
@@ -26,7 +26,7 @@ function ClothesSection({ clothingItems, onAddItemClick, onCardClick }) {
       <ul className="clothes-section__list">
         {userItems.map((item) => (
           <li key={item._id}>
-            <ItemCard item={item} onCardClick={onCardClick} />
+            <ItemCard item={item} onCardClick={onCardClick} onCardLike={onCardLike} />
           </li>
         ))}
 

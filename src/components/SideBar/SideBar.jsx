@@ -13,7 +13,7 @@ function SideBar({ onSignOut, onEditProfile }) {
           <img
             src={currentUser?.avatar || "/default-avatar.png"}
             alt="profile photo"
-            className="header__avatar"
+            className="header__avatar2"
           />
         </div>
         <div>
@@ -25,11 +25,12 @@ function SideBar({ onSignOut, onEditProfile }) {
 
       {currentUser && (
         <>
-          <button
+          <div className="sidebar__settings">
+            <button
             className="sidebar__edit-button modal__text-1"
             onClick={onEditProfile}
           >
-            Edit Profile
+            Change profile data
           </button>
 
           <button
@@ -38,7 +39,9 @@ function SideBar({ onSignOut, onEditProfile }) {
           >
             Sign Out
           </button>
-        </>
+       
+        </div>
+         </>
       )}
     </div>
   );

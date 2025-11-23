@@ -20,7 +20,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
     }
   };
 
-  // Reset form whenever modal closes
+  // Reset form
   useEffect(() => {
     if (!isOpen) {
       resetForm();
@@ -30,7 +30,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
   return (
     <ModalWithForm
       title="New garment"
-      buttonText="Add garment"
+      submitText="Add garment"
       isOpen={isOpen}
       closeModalClick={onCloseModal}
       onSubmit={handleSubmit}
@@ -78,7 +78,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
                   value={type}
                   checked={values.weather === type}
                   onChange={handleChange}
-                  required={index === 0} // only one radio needs required
+                  required={index === 0} 
                   className="modal__radio-input"
                 />
                 <span>{type[0].toUpperCase() + type.slice(1)}</span>

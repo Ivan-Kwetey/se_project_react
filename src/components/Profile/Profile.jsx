@@ -3,7 +3,7 @@ import SideBar from "../SideBar/SideBar.jsx";
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import "./Profile.css";
 
-function Profile({ clothingItems, onAddItemClick, handleCardClick, onEditProfile, onSignOut }) {
+function Profile({ clothingItems, onAddItemClick, handleCardClick, onEditProfile, onSignOut, onCardLike }) {
   return (
     <div className="profile">
       <SideBar onEditProfile={onEditProfile} onSignOut={onSignOut} />
@@ -11,6 +11,7 @@ function Profile({ clothingItems, onAddItemClick, handleCardClick, onEditProfile
         clothingItems={clothingItems}
         onAddItemClick={onAddItemClick}
         onCardClick={handleCardClick}
+        onCardLike={onCardLike}
       />
     </div>
   );
