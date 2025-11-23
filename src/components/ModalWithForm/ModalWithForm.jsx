@@ -8,7 +8,7 @@ function ModalWithForm({
   closeModalClick,
   onSubmit,
   isValid,
-  submitText, // new prop for button label
+  submitText, 
 }) {
   return (
     <div className={`modal ${isOpen ? "modal__open" : ""}`}>

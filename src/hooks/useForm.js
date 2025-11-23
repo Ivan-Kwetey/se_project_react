@@ -6,7 +6,7 @@ export function useForm(initialValues = {}) {
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
-    const form = e.target.form; // safer reference to the form element
+    const form = e.target.form; 
 
     setValues((prevValues) => ({
       ...prevValues,

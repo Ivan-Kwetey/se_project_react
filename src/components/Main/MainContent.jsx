@@ -25,7 +25,7 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
                 <ItemCard
                   item={item}
                   onCardClick={handleCardClick}
-                  onCardLike={onCardLike} // <-- pass handler
+                  onCardLike={onCardLike}
                 />
               </li>
             ))}

@@ -46,22 +46,6 @@ function Header({ onGarmentClick, weatherData, onLoginClick, onRegisterClick, on
                 + Add clothes
               </button>
 
-              {/* <button
-                onClick={onEditProfile}
-                type="button"
-                className="header__edit-profile-button modal__text-1"
-              >
-                Edit profile
-              </button> */}
-
-              {/* <button
-                onClick={onSignOut}
-                type="button"
-                className="header__signout-button modal__text-1"
-              >
-                Sign out
-              </button> */}
-
               <Link to="/profile" className="header__username modal__text-1">
                 {currentUser.name}
               </Link>

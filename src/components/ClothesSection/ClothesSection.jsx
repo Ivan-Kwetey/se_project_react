@@ -6,7 +6,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 function ClothesSection({ clothingItems, onAddItemClick, onCardClick }) {
   const currentUser = useContext(CurrentUserContext);
 
-  // Filter items that belong to the logged-in user
+  // Filter items for logged-in user
   const userItems = currentUser
     ? clothingItems.filter((item) => item.owner === currentUser._id)
     : [];
