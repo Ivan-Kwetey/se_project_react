@@ -9,11 +9,11 @@ function SideBar({ onSignOut, onEditProfile }) {
   return (
     <div className="sidebar">
       <div className="user-info">
-        <div className="avatar">
+        <div className="avatar header__avatar2">
           <img
             src={currentUser?.avatar || "/default-avatar.png"}
             alt="profile photo"
-            className="header__avatar2"
+            className="header__avatar-image"
           />
         </div>
         <div>
