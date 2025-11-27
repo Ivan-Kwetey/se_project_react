@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
-import "./LoginModal.css";
 
 function LoginModal({ isOpen, onLogin, onCloseModal, onSwitchToRegister }) {
   const initialValues = useMemo(() => ({ email: "", password: "" }), []);
@@ -23,12 +22,21 @@ function LoginModal({ isOpen, onLogin, onCloseModal, onSwitchToRegister }) {
 
   return (
     <ModalWithForm
-      title="Sign Up"
-      buttonText="Sign Up"
+      title="Log in"
+      submitText="Log in"
       isOpen={isOpen}
       closeModalClick={onCloseModal}
       onSubmit={handleSubmit}
       isValid={isValid}
+      bottomAction={
+        <button
+          type="button"
+          className="modal__alt-button"
+          onClick={onSwitchToRegister}
+        >
+          or Sign up
+        </button>
+      }
     >
       <div className="modal__contents modal__text-2">
         <label className="modal__label">
@@ -56,15 +64,6 @@ function LoginModal({ isOpen, onLogin, onCloseModal, onSwitchToRegister }) {
             placeholder="Password"
           />
         </label>
-      </div>
-      <div className="modal__action-row">
-        <button
-          type="button"
-          className="modal__alt-button"
-          onClick={onSwitchToRegister}
-        >
-          or Sign up
-        </button>
       </div>
     </ModalWithForm>
   );

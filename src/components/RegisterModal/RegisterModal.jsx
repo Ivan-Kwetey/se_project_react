@@ -27,11 +27,20 @@ function RegisterModal({ isOpen, onRegister, onCloseModal, onSwitchToLogin }) {
   return (
     <ModalWithForm
       title="Sign up"
-      buttonText="Sign up"
+      submitText="Sign up"
       isOpen={isOpen}
       closeModalClick={onCloseModal}
       onSubmit={handleSubmit}
       isValid={isValid}
+      bottomAction={
+        <button
+          type="button"
+          className="modal__alt-button "
+          onClick={onSwitchToLogin}
+        >
+          or Log in
+        </button>
+      }
     >
       <div className="modal__contents modal__text-2">
         <label className="modal__label">
@@ -85,16 +94,6 @@ function RegisterModal({ isOpen, onRegister, onCloseModal, onSwitchToLogin }) {
             placeholder="Avatar URL"
           />
         </label>
-      </div>
-
-      <div className="modal__action-row">
-        <button
-          type="button"
-          className="modal__alt-button"
-          onClick={onSwitchToLogin}
-        >
-          or Log in
-        </button>
       </div>
     </ModalWithForm>
   );

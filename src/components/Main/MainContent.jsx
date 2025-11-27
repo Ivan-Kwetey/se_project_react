@@ -9,6 +9,13 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const currentUser = useContext(CurrentUserContext);
 
+  // Filter 
+  const filteredItems = clothingItems.filter(
+    (item) =>
+      item.weather &&
+      item.weather.toLowerCase() === weatherData.type.toLowerCase()
+  );
+
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
@@ -18,17 +25,21 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
           {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {clothingItems
-            .filter((item) => item.weather.toLowerCase() === weatherData.type)
-            .map((item) => (
-              <li key={item.id} className="cards__list-item">
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
+              <li key={item.id}>
                 <ItemCard
                   item={item}
                   onCardClick={handleCardClick}
                   onCardLike={onCardLike}
                 />
               </li>
-            ))}
+            ))
+          ) : (
+            <p className="modal__text-1 cards__empty">
+              No matching items for this weather.
+            </p>
+          )}
         </ul>
       </section>
     </main>

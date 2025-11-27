@@ -1,12 +1,11 @@
 const BASE_URL = "http://localhost:3001/items";
 
 // Reusable response checker
-function checkResponse(res, message = "Error") {
+export function checkResponse(res, message = "Error") {
   if (!res.ok) throw new Error(message);
   return res.json();
 }
-
-// Helper to normalize backend item to frontend shape
+// Normalize item data structure
 function normalizeItem(item) {
   return {
     id: item._id,
@@ -19,7 +18,6 @@ function normalizeItem(item) {
   };
 }
 
-// GET all clothing items (returns an array of normalized items)
 export async function getItems() {
   const res = await fetch(BASE_URL);
   const json = await checkResponse(res, "Failed to fetch items");
@@ -43,8 +41,6 @@ export async function removeCardLike(id, token) {
   return checkResponse(res, "Failed to remove like");
 }
 
-
-// POST add a new clothing item (returns the created normalized item)
 export async function addItem(item) {
   // item, optional token
   const { token } = item || {};
@@ -61,7 +57,6 @@ export async function addItem(item) {
   return normalizeItem(json.data);
 }
 
-// DELETE a clothing item by id (returns backend response object)
 export async function deleteItem(id) {
   // second optional arg token
   let token;

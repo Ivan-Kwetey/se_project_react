@@ -23,6 +23,13 @@ import { coordinates, apiKey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
+// Normalize item data structure
+const normalizeItem = (item) => ({
+  ...item,
+  id: item._id || item.id,
+  _id: item._id || item.id,
+});
+
 function App() {
   // --- State ---
   const [currentUser, setCurrentUser] = useState(null);
@@ -37,8 +44,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-
-  // --- Temperature toggle ---
+  // --- Handlers ---
   const handleToggleSwitchChange = () =>
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
 
@@ -72,7 +78,9 @@ function App() {
 
   // --- Fetch clothing items ---
   useEffect(() => {
-    getItems().then(setClothingItems).catch(console.error);
+    getItems()
+      .then((items) => setClothingItems(items.map(normalizeItem)))
+      .catch(console.error);
   }, []);
 
   // --- Check JWT token ---
@@ -95,7 +103,7 @@ function App() {
     try {
       const payload = token ? { ...item, token } : item;
       const newItem = await addItem(payload);
-      setClothingItems((prev) => [newItem, ...prev]);
+      setClothingItems((prev) => [normalizeItem(newItem), ...prev]);
       resetForm();
       closeAllPopups();
     } catch (err) {
@@ -109,9 +117,7 @@ function App() {
       await deleteItem(token ? { id, token } : id);
 
       setClothingItems((prev) =>
-        prev.filter(
-          (item) => (item._id || item.id) !== id
-        )
+        prev.filter((item) => (item._id || item.id) !== id)
       );
       closeAllPopups();
     } catch (err) {
@@ -152,21 +158,21 @@ function App() {
 
   const handleCardLike = async (card) => {
     if (!currentUser) return;
-    const token = localStorage.getItem("jwt");
 
-    const isLiked = card.likes.some((id) => id === currentUser._id);
+    const jwt = localStorage.getItem("jwt");
+    const isLiked = card.likes.includes(currentUser._id);
+    const cardId = card._id || card.id;
 
     try {
-      const updatedCard = isLiked
-        ? await removeCardLike(card._id || card.id, token)
-        : await addCardLike(card._id || card.id, token);
+      const updatedCardResponse = isLiked
+        ? await removeCardLike(cardId, jwt)
+        : await addCardLike(cardId, jwt);
+
+      const updated = normalizeItem(updatedCardResponse.data || updatedCardResponse);
 
       setClothingItems((prevItems) =>
         prevItems.map((item) =>
-          (item._id || item.id) ===
-          (updatedCard.data?._id || updatedCard._id || updatedCard.id)
-            ? updatedCard.data || updatedCard
-            : item
+          (item._id || item.id) === (updated._id || updated.id) ? updated : item
         )
       );
     } catch (err) {

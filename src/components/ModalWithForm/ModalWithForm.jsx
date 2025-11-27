@@ -1,4 +1,3 @@
-import "./ModalWithForm.css";
 import { closeBtn } from "assets";
 
 function ModalWithForm({
@@ -8,7 +7,8 @@ function ModalWithForm({
   closeModalClick,
   onSubmit,
   isValid,
-  submitText, 
+  submitText,
+  bottomAction,
 }) {
   return (
     <div className={`modal ${isOpen ? "modal__open" : ""}`}>
@@ -25,15 +25,16 @@ function ModalWithForm({
         </div>
 
         {children}
-
-        {/* Always render submit button */}
-        <button
-          type="submit"
-          className="modal__submitBtn modal__text-2"
-          disabled={!isValid}
-        >
-          {submitText || "Save changes"}
-        </button>
+        <div className="modal__action-row">
+          <button
+            type="submit"
+            className="modal__submitBtn modal__text-2"
+            disabled={!isValid}
+          >
+            {submitText || "Save changes"}
+          </button>
+          {bottomAction}
+        </div>
       </form>
     </div>
   );
