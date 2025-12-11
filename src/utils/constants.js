@@ -104,3 +104,11 @@ export const coordinates = {
 };
 
 export const apiKey = "a214e3535092269adcc8233f225f0ece";
+
+
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.whattowearnow.soon.it"
+    : "http://localhost:3001";
+
+export { BASE_URL };
