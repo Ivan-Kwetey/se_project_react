@@ -1,4 +1,4 @@
-import { BASE_URL } from "./constants.js";
+const BASE_URL = "http://localhost:3001/items";
 
 // Reusable response checker
 export function checkResponse(res, message = "Error") {
@@ -19,11 +19,10 @@ function normalizeItem(item) {
 }
 
 export async function getItems() {
-  const res = await fetch(`${BASE_URL}/items`);
+  const res = await fetch(BASE_URL);
   const json = await checkResponse(res, "Failed to fetch items");
   return (json.data || []).map(normalizeItem);
 }
-
 // PUT /items/:id/likes
 export async function addCardLike(id, token) {
   const res = await fetch(`${BASE_URL}/${id}/likes`, {
