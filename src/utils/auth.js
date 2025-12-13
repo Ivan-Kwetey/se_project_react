@@ -1,42 +1,53 @@
-import { checkResponse } from "./api.js"; // shared helper
+import { BASE_URL } from "./constants.js";
+import { checkResponse } from "./api.js";
 
-const BASE = "http://localhost:3001";
-
-export async function register({ name, avatar, email, password }) {
-  return fetch(`${BASE}/signup`, {
+// POST /signup
+export function register({ name, avatar, email, password }) {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
     body: JSON.stringify({ name, avatar, email, password }),
   }).then(checkResponse);
 }
 
-export async function login({ email, password }) {
-  return fetch(`${BASE}/signin`, {
+// POST /signin
+export function login({ email, password }) {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
-export async function checkToken(token) {
-  return fetch(`${BASE}/users/me`, {
+// GET /users/me
+export function checkToken() {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   }).then(checkResponse);
 }
 
-export async function updateProfile({ name, avatar }, token) {
-  return fetch(`${BASE}/users/me`, {
+// PATCH /users/me
+export function updateProfile({ name, avatar }) {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify({ name, avatar }),
   }).then(checkResponse);
 }
 
-export default { register, login, checkToken, updateProfile };
+export default {
+  register,
+  login,
+  checkToken,
+  updateProfile,
+};
