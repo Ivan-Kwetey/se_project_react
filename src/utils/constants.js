@@ -104,12 +104,3 @@ export const coordinates = {
 };
 
 export const apiKey = "a214e3535092269adcc8233f225f0ece";
-<<<<<<< HEAD
-=======
-
-const BASE_URL = process.env.NODE_ENV === "production" 
-  ? "https://api.seasonwear.mine.bz"
-  : "http://localhost:3001";
-
-export { BASE_URL };
->>>>>>> a050306698dc50dbe9c21e5eb055dfd95aa169d9
