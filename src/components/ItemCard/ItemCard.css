@@ -18,10 +18,15 @@
 
 .item-card__name {
   position: absolute;
+<<<<<<< HEAD
 
   color: #00000099;
   text-align: center;
 
+=======
+  color: #00000099;
+  text-align: center;
+>>>>>>> a050306698dc50dbe9c21e5eb055dfd95aa169d9
   top: 20px;
 }
 
