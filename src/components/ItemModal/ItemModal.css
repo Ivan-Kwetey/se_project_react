@@ -1,0 +1,67 @@
+.modal__content_type_image {
+  width: 498px;
+  max-height: 610px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.modal__image {
+  height: 498px;
+  width: 100%;
+}
+
+.modal__closeBtn2 {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal__name {
+  margin: 0;
+  padding: 0;
+
+}
+
+.modal__weather {
+  margin: 0;
+  padding: 0;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 32px;
+  align-items: flex-start;
+
+
+}
+.modal__delete-button {
+  color: #FF4D00;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__delete-button:hover {
+  background-color: #b71c1c;
+}
+
+
+

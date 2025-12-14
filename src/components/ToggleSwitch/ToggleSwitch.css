@@ -1,0 +1,62 @@
+.toggle-switch {
+  position: relative;
+  width: 56px;
+  height: 26px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #7E7E7E;
+}
+
+.toggle-switch:hover {
+  border: 2px solid black;
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 29px;
+  height: 29px;
+  background-color: black;
+  border-radius: 20px;
+  top: -1.5px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.toggle-thumb:hover{
+  width: 32px;
+}
+
+.toggle-thumb.left {
+  transform: translateX(-15px);
+}
+
+.toggle-thumb.right {
+  transform: translateX(15px);
+}
+
+.toggle-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.unit {
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 2;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.unit.active {
+  color: white;
+}
+
+.unit.inactive {
+  color: #00000080;
+}

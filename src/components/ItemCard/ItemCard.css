@@ -1,0 +1,41 @@
+.item-card {
+  display: flex;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  gap: 20px;
+  width: fit-content;
+}
+
+.item-card__image {
+  display: flex;
+  width: 323px;
+  height: 326px;
+  border: 1px solid black;
+  border-radius: 19px;
+}
+
+.item-card__name {
+  position: absolute;
+
+  color: #00000099;
+  text-align: center;
+
+  top: 20px;
+}
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item-card__name-text {
+  background-color: white;
+  border-radius: 4px;
+  padding: 2px 12px;
+}
+.item-card__name-text-like {
+  gap: 10px;
+  display: flex;
+}
