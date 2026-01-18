@@ -45,12 +45,6 @@ The live site www.seasonwear.mine.bz.
 
 ---
 
-## Screenshots
-
-(coming soon after final fullstack)
-
----
-
 ## Backend  repo link
 
 (https://github.com/Ivan-Kwetey/se_project_express)
